@@ -1,0 +1,15 @@
+#########################################
+#					#
+#	Descarga canciones listas	#
+#	     listasSpotify.com		#
+#					#
+#########################################
+
+ Requerimientos:
+ - Comandos: curl, wget, grep
+ - URL válida de listasSpotify.com*
+ - 
+
+ Ejecucion:
+ ./dwnld_listas_spotify.sh url-valida
+
