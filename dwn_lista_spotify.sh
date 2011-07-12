@@ -45,22 +45,22 @@ else
 fi
 
 #Nos ha pasado un 2º argumento?
-if [ $1 ]
+if [ $2 ]
 then
 	#Comprobamos directorio valido
-	if test -d $1	# Es direcotior¿?
+	if test -d $2	# Es direcotior¿?
 	then	# Directorio valido
 	        echo "Directorio de salida: "$1"Nombre_lista/";
         	#dirbase=$1; # Mas comprobaciones!
 		# Ultimo char='/' ¿?
-		long=`echo $1 | wc -m`;	# Longitud caracteres+1
+		long=`echo $2 | wc -m`;	# Longitud caracteres+1
                 long=`expr $long - 1`;	# resto el desfase
-		lchar=`echo $1 | cut -c $long`;	# Cojo el ultimo char
+		lchar=`echo $2 | cut -c $long`;	# Cojo el ultimo char
 		if [ $lchar == '/' ]
                 then
-			dirbase=$1; # Esta correcto y como queremos le dir
+			dirbase=$2; # Esta correcto y como queremos le dir
 		else	# anadimos el '/' al final
-			dirbase=`echo $1"/"`;
+			dirbase=`echo $2"/"`;
                 fi
 	else	# Directorio no valido->salimos!
 		echo "Directorio pasado como argumento:"$1", no valido.";
