@@ -132,6 +132,6 @@ do
 done < $dirbase$outdir$songs
 
 echo "Eliminamos ficheros temporales..."
-#rm $dirbase$outdir$fich
-#rm $dirbase$outdir$aux
-#rm $dirbase$outdir$links
+rm $dirbase$outdir$fich
+rm $dirbase$outdir$aux
+rm $dirbase$outdir$links
