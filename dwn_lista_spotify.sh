@@ -50,11 +50,10 @@ then
 	#Comprobamos directorio valido
 	if test -d $2	# Es direcotior¿?
 	then	# Directorio valido
-	        echo "Directorio de salida: "$1"Nombre_lista/";
         	#dirbase=$1; # Mas comprobaciones!
 		# Ultimo char='/' ¿?
 		long=`echo $2 | wc -m`;	# Longitud caracteres+1
-                long=`expr $long - 1`;	# resto el desfase
+                long=`expr $long`;	# resto el desfase
 		lchar=`echo $2 | cut -c $long`;	# Cojo el ultimo char
 		if [ $lchar == '/' ]
                 then
@@ -62,8 +61,9 @@ then
 		else	# anadimos el '/' al final
 			dirbase=`echo $2"/"`;
                 fi
+	        echo "Directorio de salida: "$dirbase"Nombre_lista/";
 	else	# Directorio no valido->salimos!
-		echo "Directorio pasado como argumento:"$1", no valido.";
+		echo "Directorio pasado como argumento:"$2", no valido.";
 		exit;
 	fi
 else
