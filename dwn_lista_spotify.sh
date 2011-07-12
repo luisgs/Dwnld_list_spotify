@@ -12,8 +12,8 @@
 #  REQUIREMENTS:  ---
 #          BUGS:  ---
 #         NOTES:  ---
-#        AUTHOR:  Planificacion Estrategica (), calidad@upm.es
-#       COMPANY:  UPM-VOAPE 
+#        AUTHOR:  luisGS 
+#       COMPANY:  --- 
 #       VERSION:  1.0
 #       CREATED:  27/06/11 09:10:27 CEST
 #      REVISION:  ---
