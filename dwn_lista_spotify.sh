@@ -9,7 +9,7 @@
 #			listasSpotify.com)
 # 
 #       OPTIONS:  ---
-#  REQUIREMENTS:  ---
+#  REQUIREMENTS:  curl, grep, wget command
 #          BUGS:  ---
 #         NOTES:  ---
 #        AUTHOR:  luisGS 
@@ -132,6 +132,6 @@ do
 done < $dirbase$outdir$songs
 
 echo "Eliminamos ficheros temporales..."
-rm $dirbase$outdir$fich
-rm $dirbase$outdir$aux
-rm $dirbase$outdir$links
+#rm $dirbase$outdir$fich
+#rm $dirbase$outdir$aux
+#rm $dirbase$outdir$links
