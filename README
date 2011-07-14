@@ -7,8 +7,8 @@
 
  Requerimientos:
  - Comandos: curl, wget, grep
- - URL válida de listasSpotify.com*
- - 
+ - URL válida de listasSpotify.es
+ 	Este direccion debe ser de la forma 
 
  Ejecucion:
  ./dwnld_listas_spotify.sh url-valida
