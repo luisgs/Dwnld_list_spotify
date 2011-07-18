@@ -109,7 +109,7 @@ cat $dirbase$outdir$songs
 while read line
 do
 	## Ya han sido descargados?
-	if [ -f $dirbase$outdir$line ];
+	if [ -f $dirbase$outdir$line.mp3 ];
 	then
 		echo "Cancion $line YA descargada!!!!" 
 	else	#No ha sido descargada
