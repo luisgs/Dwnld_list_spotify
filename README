@@ -6,10 +6,14 @@
 #########################################
 
  Requerimientos:
- - Comandos: curl, wget, grep
+ - Comandos: curl, wget, grep.
+ 	NOTA: Posiblemente 'curl' no este instalado.
  - URL válida de listasSpotify.es
- 	Este direccion debe ser de la forma 
+ 	Este direccion debe ser de la forma:
+		http://listasspotify.es/lista/8454/tardes-de-longboard
+	NOTA: Debe contener la lista de las canciones que componen
+	la lista de reproducción, en otro caso no podrá descargar nada
 
  Ejecucion:
- ./dwnld_listas_spotify.sh url-valida
+ ./dwnld_listas_spotify.sh url-valida [Directorio-Base]
 
