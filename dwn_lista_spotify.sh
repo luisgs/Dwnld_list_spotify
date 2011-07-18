@@ -9,14 +9,14 @@
 #			listasSpotify.com)
 # 
 #       OPTIONS:  ---
-#  REQUIREMENTS:  ---
+#  REQUIREMENTS:  curl, grep, wget command
 #          BUGS:  ---
 #         NOTES:  ---
-#        AUTHOR:  Planificacion Estrategica (), calidad@upm.es
-#       COMPANY:  UPM-VOAPE 
-#       VERSION:  1.0
+#        AUTHOR:  luisGS 
+#       COMPANY:  --- 
+#       VERSION:  1.2
 #       CREATED:  27/06/11 09:10:27 CEST
-#      REVISION:  ---
+#      REVISION:  13/07/11
 #===============================================================================
 # URL de la lista Spotify
 url=$1
@@ -24,7 +24,7 @@ cut1=`echo $1 | cut -c1-16`;
 cut2=`echo $1 | cut -c8-23`;
 fich="lista.html";
 aux='aux';
-dirbase="/tmp/"
+#dirbase="/tmp/"
 songs="songs.txt";
 links="links.txt";
 repro='lista_reproducion.m3u';
@@ -43,6 +43,36 @@ else
 	echo "Argumento erroneo, por favor, direccion listasSpotify.es correcta.";
 	exit;
 fi
+
+#Nos ha pasado un 2º argumento?
+if [ $2 ]
+then
+	#Comprobamos directorio valido
+	if test -d $2	# Es direcotior¿?
+	then	# Directorio valido
+        	#dirbase=$1; # Mas comprobaciones!
+		# Ultimo char='/' ¿?
+		long=`echo $2 | wc -m`;	# Longitud caracteres+1
+                long=`expr $long`;	# resto el desfase
+		lchar=`echo $2 | cut -c $long`;	# Cojo el ultimo char
+		if [ $lchar == '/' ]
+                then
+			dirbase=$2; # Esta correcto y como queremos le dir
+		else	# anadimos el '/' al final
+			dirbase=`echo $2"/"`;
+                fi
+	        echo "Directorio de salida: "$dirbase"Nombre_lista/";
+	else	# Directorio no valido->salimos!
+		echo "Directorio pasado como argumento:"$2", no valido.";
+		exit;
+	fi
+else
+	echo "Directorio de salida por defecto: /tmp/Nombre_lista/";
+        dirbase='/tmp/';
+fi
+# Ahora tenemos en $dirbase el directorio de salida donde se copiara
+# toda la lista con las canciones
+
 
 echo "Ahora pasamos a descargar las canciones (directorio:$dirbase$outdir/)"
 # Si existe directorio no lo crea. e.o.c SI
