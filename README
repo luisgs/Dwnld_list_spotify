@@ -14,6 +14,16 @@
 	NOTA: Debe contener la lista de las canciones que componen
 	la lista de reproducción, en otro caso no podrá descargar nada
 
+ Funcionamiento:
+ - Descargará en un directorio cuyo nombre será el de la lista y que se
+ ubicará dentro del directorio destino o en el directorio donde se 
+ ejecutó el comando, todas las canciones de la lista; estas canciones
+ las descarga de Dilandau.com, eligiendo siempre la primera opción.
+
+ De igual manera se crea un fichero m3u con la lista de canciones para
+ reproducir.
+
+
  Ejecucion:
- ./dwnld_listas_spotify.sh url-valida [Directorio-Base]
+ ./dwnld_listas_spotify.sh url-valida [Directorio-Destino]
 
