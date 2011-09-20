@@ -99,7 +99,7 @@ grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s
 if [ ! -s $dirbase$outdir$songs ];
 then
 	echo "Opcion 2..."
-	grep "<br />" $dirbase$outdir$fich | sed "s/<br \/>//g" | sed "s/ /_/g" > $dirbase$outdir$songs;
+	grep "<br />" $dirbase$outdir$fich | sed "s/<br \/>//g" | sed "s/ - /-/g" | sed "s/ /_/g" > $dirbase$outdir$songs;
 else echo "hola!";
 fi
 
