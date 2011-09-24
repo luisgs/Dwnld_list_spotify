@@ -55,7 +55,7 @@ then
 		long=`echo $2 | wc -m`;	# Longitud caracteres+1
                 long=`expr $long`;	# resto el desfase
 		lchar=`echo $2 | cut -c $long`;	# Cojo el ultimo char
-		if [ $lchar == '/' ]
+		if [ $lchar -eq "/" ]
                 then
 			dirbase=$2; # Esta correcto y como queremos le dir
 		else	# anadimos el '/' al final
@@ -94,7 +94,7 @@ else
 fi
 
 # Extraemos las canciones a un fichero externo
-grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ /_/g" > $dirbase$outdir$songs;
+grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ - /_/g " | sed "s/ /_/g" > $dirbase$outdir$songs;
 #Posibilidades de ficheros URL
 if [ ! -s $dirbase$outdir$songs ];
 then
@@ -132,6 +132,6 @@ do
 done < $dirbase$outdir$songs
 
 echo "Eliminamos ficheros temporales..."
-rm $dirbase$outdir$fich
-rm $dirbase$outdir$aux
-rm $dirbase$outdir$links
+#rm $dirbase$outdir$fich
+#rm $dirbase$outdir$aux
+#rm $dirbase$outdir$links
