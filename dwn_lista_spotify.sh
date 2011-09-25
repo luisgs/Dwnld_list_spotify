@@ -94,13 +94,15 @@ else
 fi
 
 # Extraemos las canciones a un fichero externo
-grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ - /_/g " | sed "s/ /_/g" > $dirbase$outdir$songs;
+grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ - /-/g " | sed "s/ /_/g" > $dirbase$outdir$songs;
 #Posibilidades de ficheros URL
 if [ ! -s $dirbase$outdir$songs ];
 then
 	echo "Opcion 2..."
 	grep "<br />" $dirbase$outdir$fich | sed "s/<br \/>//g" | sed "s/ - /-/g" | sed "s/ /_/g" > $dirbase$outdir$songs;
-else echo "hola!";
+else 
+	echo "No hay una Opcion para este caso.!!";
+	break;
 fi
 
 echo "Estas son las canciones de la lista enviada:"
@@ -132,6 +134,6 @@ do
 done < $dirbase$outdir$songs
 
 echo "Eliminamos ficheros temporales..."
-#rm $dirbase$outdir$fich
-#rm $dirbase$outdir$aux
-#rm $dirbase$outdir$links
+rm $dirbase$outdir$fich
+rm $dirbase$outdir$aux
+rm $dirbase$outdir$links
