@@ -14,9 +14,9 @@
 #         NOTES:  ---
 #        AUTHOR:  luisGS 
 #       COMPANY:  --- 
-#       VERSION:  1.2
+#       VERSION:  1.5
 #       CREATED:  27/06/11 09:10:27 CEST
-#      REVISION:  13/07/11
+#      REVISION:  20/11/11
 #===============================================================================
 # URL de la lista Spotify
 url=$1
