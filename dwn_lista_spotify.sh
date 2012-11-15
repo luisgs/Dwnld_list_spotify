@@ -60,7 +60,7 @@ then
 		long=`echo $2 | wc -m`;	# Longitud caracteres+1
                 long=`expr $long`;	# resto el desfase
 		lchar=`echo $2 | cut -c $long`;	# Cojo el ultimo char
-		if [ $lchar -eq "/" ]
+		if [ "$lchar" = "/" ]
                 then
 			dirbase=$2; # Esta correcto y como queremos le dir
 		else	# anadimos el '/' al final
@@ -89,12 +89,11 @@ echo "############################################";
 echo "Ahora pasamos a descargar las canciones (directorio:$dirbase$outdir)"
 echo "############################################";
 # Si existe directorio no lo crea. e.o.c SI
-mkdir -p $dirbase$outdir
+mkdir -p $dirbase$outdir;
 
-# URL pasado como argumento ok
-# descargamos la pagina
-echo "############################################";
-echo "Descargando la pagina para analizarla."
+# URL pasado como argumento ok # descargamos la pagina
+echo "############################################"
+echo "Descargando la pagina para analizarla.";
 echo "############################################";
 curl $1 > $dirbase$outdir$fich
 echo "Descargada en $dirbase$outdir$fich"
@@ -133,31 +132,36 @@ echo "Estas son las canciones de la lista enviada:"
 echo "############################################";
 cat $dirbase$outdir$songs
 echo "############################################";
+touch $dirbase$outdir"lincos"
+cat /dev/null > $dirbase$outdir"lincos"
 
 while read line
 do
 	## Ya han sido descargados?
-	if [ -f $dirbase$outdir$line.mp3 ];
+	if [ -f "$dirbase$outdir$line.mp3" ];
 	then
 		echo "Cancion $line YA descargada!!!!" 
 	else	#No ha sido descargada
 		echo "############################################";
 		echo -e "# Descargando $line"
 		echo "############################################";
-		# Descargamos de pagina de Dilandau
-		curl http://es.dilandau.eu/descargar_musica/$line-1.html > $dirbase$outdir$fich
+		# Descargamos la pagina de Dilandau para una cancion espacifica
+		`curl http://es.dilandau.eu/descargar-mp3/$line-1.html > $dirbase$outdir$fich`;
 		# Guardamos todos los links de descargas
-		tr -s "'" " " < $dirbase$outdir$fich > $dirbase$outdir$aux
-		cat $dirbase$outdir$aux | grep -a "button download_button" | sed 's/\t<a class="button download_button" title="Haz clic derecho y Guardar enlace como " href="//g' > $dirbase$outdir$fich
-		cat $dirbase$outdir$fich | sed 's/" target="_blank" rel="nofollow">//g' > $dirbase$outdir$links
+		`sed -e 's/.*file : "//' -e 's/".*//' $dirbase$outdir$fich > $dirbase$outdir$links`;
+
+		echo "####!!!$line:" >> $dirbase$outdir"lincos"
+		`sed -e 's/.*file : "//' -e 's/".*//' $dirbase$outdir$fich >> $dirbase$outdir"lincos"`;
+		echo "####!!!!\n" >> $dirbase$outdir"lincos"
+
 		while read linea
 		do
 			echo "############################################";
-			echo "La canción $line tiene por link a descargar:"$linea;
+			echo "La canción $line tiene por link a descargar:$linea";
 			echo "############################################";
 			# wget -t -> numero de reintentos
-			wget -O$dirbase$outdir$line.mp3 -t 3 -T 10 "$linea" > /dev/null
-			echo $dirbase$outdir$line.mp3 >> $dirbase$outdir$repro
+			wget -O"$dirbase$outdir$line.mp3" -t 3 -T 10 "$linea" > /dev/null
+			echo "$dirbase$outdir$line.mp3" >> "$dirbase$outdir$repro"
 			echo "############################################";
 			break;	# con la primera nos vale
 		done < $dirbase$outdir$links
