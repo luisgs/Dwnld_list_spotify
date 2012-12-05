@@ -40,7 +40,7 @@ then
 	echo "############################################";
 	echo "Direccion de Spotify correcta.";
 	echo "############################################";
-	outdir=`echo $1 | sed 's/.*\///g'`; # nombre del dir=URl pasada!
+	outdir=`echo $1 | sed "s/.*\///g"`; # nombre del dir=URl pasada!
 	outdir=$outdir/;
 else
 	echo "############################################";
@@ -67,7 +67,7 @@ then
 			dirbase=`echo $2"/"`;
                 fi
 		echo "############################################";
-	        echo "Directorio de salida: "$dirbase"Nombre_lista/";
+	        echo 'Directorio de salida: "$dirbase"Nombre_lista/"';
 		echo "############################################";
 	else	# Directorio no valido->salimos!
 		echo "############################################";
@@ -86,7 +86,7 @@ fi
 
 
 echo "############################################";
-echo "Ahora pasamos a descargar las canciones (directorio:$dirbase$outdir)"
+echo 'Ahora pasamos a descargar las canciones (directorio:'"$dirbase$outdir"')';
 echo "############################################";
 # Si existe directorio no lo crea. e.o.c SI
 mkdir -p $dirbase$outdir;
@@ -112,14 +112,14 @@ else
 fi
 
 # Extraemos las canciones a un fichero externo
-grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ /_/g" > $dirbase$outdir$songs;
+grep "<li>" $dirbase$outdir$fich | sed "s/^<li>//g" | sed "s/<\/li>//g" | sed "s/ /-/g" > $dirbase$outdir$songs;
 # Posibilidades de ficheros URL
 if [ ! -s $dirbase$outdir$songs ];
 then
 	echo "############################################";
 	echo "Opcion 2..."
 	echo "############################################";
-	grep "<br />" $dirbase$outdir$fich | tr -s ' ' | sed "s/<br \/>//g" | sed "s/ <p>//g" | sed "s/ – /-/g" | sed "s/ - /-/g" | sed "s/ /_/g" > $dirbase$outdir$songs
+	grep "<br />" $dirbase$outdir$fich | tr -s ' ' | sed "s/<br \/>//g" | sed "s/ <p>//g" | sed "s/ – /-/g" | sed "s/ - /-/g" | sed "s/ /-/g" > $dirbase$outdir$songs
 else 
 	echo "############################################";
 	echo "No hay una Opcion para este caso.!!";
@@ -146,25 +146,26 @@ do
 		echo -e "# Descargando $line"
 		echo "############################################";
 		# Descargamos la pagina de Dilandau para una cancion espacifica
-		`curl http://es.dilandau.eu/descargar-mp3/$line-1.html > $dirbase$outdir$fich`;
+		`curl 'http://es.dilandau.eu/descargar-mp3/$line-1.html' > "$dirbase$outdir$fich"`;
 		# Guardamos todos los links de descargas
-		`sed -e 's/.*file : "//' -e 's/".*//' $dirbase$outdir$fich > $dirbase$outdir$links`;
-
+		`sed -e 's/.*file : "//' -e 's/".*//' "$dirbase$outdir$fich" > "$dirbase$outdir$links"1`;
+		`sed "s/ /%20/g" "$dirbase$outdir$links"1 > "$dirbase$outdir$links"`;
+		`echo -e '\n' >>  $dirbase$outdir$links`;
 		echo "####!!!$line:" >> $dirbase$outdir"lincos"
 		`sed -e 's/.*file : "//' -e 's/".*//' $dirbase$outdir$fich >> $dirbase$outdir"lincos"`;
-		echo "####!!!!\n" >> $dirbase$outdir"lincos"
+		echo -e '####!!!!\n' >> $dirbase$outdir"lincos"
 
 		while read linea
 		do
 			echo "############################################";
-			echo "La canción $line tiene por link a descargar:$linea";
+			echo 'La canción '"$line"' tiene por link a descargar:'"$linea";
 			echo "############################################";
 			# wget -t -> numero de reintentos
 			wget -O"$dirbase$outdir$line.mp3" -t 3 -T 10 "$linea" > /dev/null
 			echo "$dirbase$outdir$line.mp3" >> "$dirbase$outdir$repro"
 			echo "############################################";
 			break;	# con la primera nos vale
-		done < $dirbase$outdir$links
+		done < "$dirbase$outdir$links"
 	fi
 done < $dirbase$outdir$songs
 
